@@ -196,6 +196,14 @@ exports.init = function(grunt) {
       }
       // Remove the old sourceMappingURL.
       src = src.replace(sourceMapRegEx, '');
+
+      var srcLength = src.split('\n').length - 1;
+
+      if ((initLine + srcLength) > this.line) {
+        this.line = initLine + srcLength;
+        this.column = 0;
+      }
+
     } else {
       // Otherwise perform a rudimentary tokenization of the source.
       this._forEachTokenPosition(src, relativeFilename, this.addMapping);
